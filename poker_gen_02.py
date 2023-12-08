@@ -21,18 +21,18 @@ class Mister_House:
         def quitter(self):
             self.folded = True
         
-    class agent(Player):
+    class agent(self.Player):
         #ai
         def request_action(self,house):
             pass
     
-    class user(Player):
+    class user(self.Player):
         #user   
         def request_action(self,house):
             if house.bet == 0:
-                self.req_init_bet()
+                req_init_bet()
             else:
-                self.req_play()
+                req_play()
         def req_init_bet(self,house):
             #ask the player for an initial bet through Maestro Class
             pass
@@ -59,25 +59,25 @@ class Mister_House:
         self.max_turn = len(players) -1
 
     
-    def draw(self):
+    def draw():
     #draw top card
         temp = self.deck[self.deck_place]
         self.deck_place+=1
         return temp
 
-    def create_deck(self):
+    def create_deck():
     # create an empty deck
         deck = [] 
         # iterate through each card
-        for i in range(len(self.SUIT)):
-            for j in range(len(self.TYPE)):
-                deck[i*14+j] = [i,j]
+        for i in range(4):
+            for j in range(13):
+                deck[i*13+j] = [i,j]
         # give it out
         return random.shuffle(deck)
         
-    def deal(self):
+    def deal():
         # shuffle
-        self.deck = self.create_deck()
+        self.deck = create_deck()
         # dealt to players
         for i in self.players:
             i.hand = [self.draw(),self.draw()]
@@ -139,7 +139,7 @@ class Maestro:
             print("River:\n\n")
             river_str = ""
             temp = house.get_river
-            for i in house.get_river:
+            for i in get_river:
                 pass # get type and string and add it to the master string with spacing
             
             # print that big string out
