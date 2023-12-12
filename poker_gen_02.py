@@ -99,6 +99,8 @@ class Mister_House:
             elif turn == 3:
                 print("Eval River")
                 return self.evaluate_river(hand, river_cards)
+            elif turn == 4:
+                return self.evaluate_river(hand, river_cards)
 
         def evaluate_flop(self, hand, river_cards):
             if self.has_straight_flush(hand + river_cards):
@@ -286,15 +288,14 @@ class Mister_House:
         if turn == 1:
             for i in range(3):
                 self.table_cards[i] = self.draw()
-            self.river_cards = self.table_cards.copy()
+            self.river_cards = [card for card in self.table_cards if card is not None]
+            print(self.river_cards)
         elif turn == 2:
             self.table_cards[3] = self.draw()
             self.river_cards.append(self.table_cards[3]) # 4 cards for the turn
-            print(self.table_cards[:4])
         elif turn == 3:
             self.table_cards[4] = self.draw()
             self.river_cards.append(self.table_cards[4])  # All 5 cards for the river
-            print(self.table_cards[:5])
     
     def all_turn(self, maestro):  # Add maestro as a parameter
         for i in self.players:
@@ -342,7 +343,7 @@ class Maestro:
             house.setup(h_money,players)
                                     
         def get_move_from_player(self,house: Mister_House,player):
-            os.system('clr')
+            os.system("clear")
             print("River:\n\n")
             river_str = ""
             temp = house.get_river
@@ -382,7 +383,7 @@ class Maestro:
             "spade"] 
         
     def stats(self, house):
-        os.system('clr')
+        os.system("clear")
         print("\nPlayer Statistics:")
         for player in house.players:
             print(f"{player.name} - Bets: {player.bets}, Folds: {player.folds}, All-ins: {player.all_ins}, Total Betted: {player.total_bet}")
@@ -391,7 +392,7 @@ class Maestro:
     
     def play_game(self):
         while True:
-            os.system('clr')
+            os.system("clear")
             print("Main Menu:")
             print("1. Stats")
             print("2. Quit")
@@ -414,8 +415,7 @@ class Maestro:
                 house.setup(5000, players)
                 house.deal()
 
-                # Simulate a few turns (replace this with your actual game logic)
-                for turn in range(4):  # Assuming four turns for this example
+                for turn in range(4):
                     print(f"\n--- Turn {turn + 1} ---")
                     
                     if turn >= 1:
